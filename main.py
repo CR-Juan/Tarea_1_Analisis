@@ -61,21 +61,7 @@ def Crear_Matriz(filas, columnas):
             f"Memoria Actual: {Actual}\n"
             f"Memoria Pico: {Maximo}\n"
             f"Matriz: {ordenar_MatrizAleatoria(matriz)}\n"
-             )   
-       
-print(Crear_Matriz(10,10))
-
-"""
-Quicksort:
-Duracion: 1.3334903717041016
-Memoria Actual: 10099512
-Memoria Pico: 10099708
-
-Mio:
-Duracion: 0.9638333320617676
-Memoria Actual: 10098968
-Memoria Pico: 10099164
-"""
+             )
 
 """""
 =========================================
