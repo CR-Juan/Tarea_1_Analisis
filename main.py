@@ -1,37 +1,45 @@
-import random
-import time
-import tracemalloc
+import random # Libreria para generar listas con numeros randoms.
+import time # Libreria para visaulizar el tiempo de ejecución del programa.
+import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza la ejecucion del programa.
 
+"""
+=========================================
+        Funciones de Ordenamiento
+=========================================
+"""
+
+# Función que genera números aleatorios para posteriormente agregarlos a las listas de la matriz.
 def Numero_aleatorio():
     return random.randint(100, 100000)
 
+# Función de ordenamiento Quicksort (Función reutilizada para probar función Quicksort vs función generada por el grupo).
 def quicksort(arr):
-    # Caso base: listas vacías o de un solo elemento ya están ordenadas
+    # Caso inicial donde las listas pueden estar vacías o si la lista posee un solo elemento.
     if len(arr) <= 1:
         return arr
     else:
-        pivote = arr[len(arr) // 2]  # elijo el elemento del medio como pivote
+        pivote = arr[len(arr) // 2]  # Se selecciona el elemento central de la lista para utilizarlo como pivote.
         izquierda = [x for x in arr if x < pivote]
         centro = [x for x in arr if x == pivote]
         derecha = [x for x in arr if x > pivote]
         return quicksort(izquierda) + centro + quicksort(derecha)
 
-
-
+# Función para ordenar cada una de las listas que están dentro de la matriz.
 def ordenar_MatrizAleatoria(Matriz):
     for x in range(len(Matriz)):
         Matriz[x] = ordenar_listaMatriz(Matriz[x])
     return Matriz
 
+# Función que se encarga de ordenar cada uno de los elementos que están dentro de una lista.
 def ordenar_listaMatriz(lista):
-    NewLista = []
+    NewLista = [] # Variable donde se almacenará la lista ya ordenada para retornarla al final.
     while lista != []:
-        x = lista[0]
-        lista = lista[1:]
-        y = 0
+        x = lista[0] # Variable que almacenará el primer elemento de la lista.
+        lista = lista[1:] # Se recorta la lista sin el primer elemento.
+        y = 0 
         while y < len(lista):
             if x > lista[0]:
-                lista += [x]
+                lista += [x] 
                 x = lista[0]
                 lista = lista[1:]
                 y += 1
@@ -43,19 +51,21 @@ def ordenar_listaMatriz(lista):
         NewLista += [x]
     return NewLista
                 
+# Función para crear una matriz con la cantidad de filas y columnas recibidas y ordenarla para mostrarla.
 def Crear_Matriz(filas, columnas):
-    inicio = time.time()
-    tracemalloc.start()
+    inicio = time.time() # Se inicia el tiempo de ejecución del programa.
+    tracemalloc.start() # Se inicia el control de memoria durante la ejecución del programa.
     matriz = []
     for _ in range(filas):
         fila = []
         for _ in range(columnas):
-            fila += [Numero_aleatorio()]
+            fila += [Numero_aleatorio()] # Fila se rellena con números aleatorios.
         matriz += [fila]
-    final = time.time()
-    Duracion = final - inicio
-    Actual, Maximo = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    final = time.time() # Se finaliza el tiempo de ejecución del programa.
+    Duracion = final - inicio # Se resta el tiempo inicial del tiempo final para calcular el tiempo total.
+    Actual, Maximo = tracemalloc.get_traced_memory() # Variables para almacenar la memoria actual y el pico máximo de la memoria utilizada.
+    tracemalloc.stop() # Se frena el control de memoria de la ejecución del programa.
+    # Se muestra el tiempo de la ejecición, la memoria actual, la memoria máxima utilizada y la matriz ordenada.
     return (
             f"Duracion: {Duracion}\n"
             f"Memoria Actual: {Actual}\n"
@@ -63,62 +73,50 @@ def Crear_Matriz(filas, columnas):
             f"Matriz: {ordenar_MatrizAleatoria(matriz)}\n"
              )
 
-"""""
-=========================================
-            Funciones de prueba
-=========================================
 """
-def Numero_aleatorio():
-    return random.randint(100, 100000)
-def Crear_Matriz_2(filas, columnas):
-    matriz = []
-    for _ in range(filas):
-        fila = []
-        for _ in range(columnas):
-            fila += [Numero_aleatorio()]
-        matriz += [fila]
-    
-    return matriz
-
-"""
-
-=========================================
+============================================
            Funciones de Busqueda
-=========================================
+============================================
 """
+
+# Función de busqueda por medio de Busqueda Binaria (Función reutilizada para comparar Búsqueda Binaria vs función generada por el grupo).
 def BusquedaBinaria(lista, objetivo):
-    izq = 0
-    derecha = len(lista) - 1
+    izq = 0 # Índice inicial.
+    derecha = len(lista) - 1 # Índice final.
+    # Validar que no se crucen los límites izquierda y derecha.
     while izq <= derecha:
-        mitad = izq + (derecha - izq) // 2
-        if (lista[mitad] == objetivo):
+        mitad = izq + (derecha - izq) // 2 # Elemento central de la lista.
+        if (lista[mitad] == objetivo): # Ver si el elemento del medio es igual al elemento que estamos buscando.
             return True
-        elif (lista[mitad] < objetivo):
+        elif (lista[mitad] < objetivo): # Si el elemento es mayor a la mitad, buscamos en la parte derecha.
             izq = mitad + 1
         else:
-            derecha = mitad - 1
+            derecha = mitad - 1 # Si el elemento es menor a la mitad, buscamos en la parte izquierda.
     return False
 
+# Función que recorre cada una de las listas de la matriz y aplica la busqueda binaria.
 def BusquedaBinaria_matriz(matriz, objetivo):
     for fila in matriz:
         if BusquedaBinaria(fila, objetivo):
             return True
     return False
 
-def busqueda_matriz(matriz, objetivo): #n
+# Función que recorre cada una de las listas de la matriz y aplica la función de busqueda realizada por el grupo.
+def busqueda_matriz(matriz, objetivo):
     for lista in matriz:
-        if busqueda_matriz_rec(lista, objetivo):
+        if busqueda_grupal(lista, objetivo):
             return True
     return False
 
-def busqueda_matriz_rec(lista, objetivo):
+# Función de busqueda creada por el grupo.
+def busqueda_grupal(lista, objetivo):
+    # Valida que la lista no esté vacía.
     if lista == []:
         return False
-    
-    mitad = len(lista) // 2
-    izq = lista[:mitad]
-    derecha = lista[mitad:]
-
+    mitad = len(lista) // 2 # Saca el índice central de la lista.
+    izq = lista[:mitad] # Variable que almacena la lista de elementos del índice inicial a la derecha.
+    derecha = lista[mitad:] # Variable que almacena la lista de los elementos desde el inicio de la lista hasta el índice central.
+    # Mientras que ninguno de los extremos de la lista sea vacío se ejecuta.
     while (izq != [] or derecha != []):
         if izq != []:
             if izq[0] == objetivo:
