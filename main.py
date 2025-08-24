@@ -100,12 +100,6 @@ def Crear_Matriz_2(filas, columnas):
            Funciones de Busqueda
 =========================================
 """
-def BusquedaBinaria_matriz(matriz, objetivo):
-    for fila in matriz:
-        if BusquedaBinaria(fila, objetivo):
-            return True
-    return False
-
 def BusquedaBinaria(lista, objetivo):
     izq = 0
     derecha = len(lista) - 1
@@ -119,7 +113,13 @@ def BusquedaBinaria(lista, objetivo):
             derecha = mitad - 1
     return False
 
-def busqueda_matriz(matriz, objetivo):
+def BusquedaBinaria_matriz(matriz, objetivo):
+    for fila in matriz:
+        if BusquedaBinaria(fila, objetivo):
+            return True
+    return False
+
+def busqueda_matriz(matriz, objetivo): #n
     for lista in matriz:
         if busqueda_matriz_rec(lista, objetivo):
             return True
@@ -128,7 +128,7 @@ def busqueda_matriz(matriz, objetivo):
 def busqueda_matriz_rec(lista, objetivo):
     if lista == []:
         return False
-
+    
     mitad = len(lista) // 2
     izq = lista[:mitad]
     derecha = lista[mitad:]
@@ -143,4 +143,5 @@ def busqueda_matriz_rec(lista, objetivo):
             if derecha[0] == objetivo:
                 return True
             derecha = derecha[1:]
-
+        
+    return False
