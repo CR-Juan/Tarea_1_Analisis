@@ -1,3 +1,9 @@
+import random # Libreria para generar listas con numeros randoms.
+import time # Libreria para visaulizar el tiempo de ejecución del programa.
+import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza la ejecucion del programa.
+from algoritmo_ordenamiento import quicksort # Importa la función de ordenamiento creada por el grupo.
+
+
 """
 ============================================
            Funciones de Busqueda
@@ -6,6 +12,10 @@
 
 # Función de busqueda por medio de Busqueda Binaria (Función reutilizada para comparar Búsqueda Binaria vs función generada por el grupo).
 def BusquedaBinaria(lista, objetivo):
+    if not isinstance(lista,list):
+        print("El argumento 'lista' debe ser una lista.")
+        return False
+    
     izq = 0 # Índice inicial.
     derecha = len(lista) - 1 # Índice final.
     # Validar que no se crucen los límites izquierda y derecha.
@@ -21,6 +31,9 @@ def BusquedaBinaria(lista, objetivo):
 
 # Función que recorre cada una de las listas de la matriz y aplica la busqueda binaria.
 def BusquedaBinaria_matriz(matriz, objetivo):
+    if not isinstance(matriz, list):
+        print("El argumento 'matriz' debe ser una lista.")
+        return False
     for fila in matriz:
         if BusquedaBinaria(fila, objetivo):
             return True
@@ -28,6 +41,10 @@ def BusquedaBinaria_matriz(matriz, objetivo):
 
 # Función que recorre cada una de las listas de la matriz y aplica la función de busqueda realizada por el grupo.
 def busqueda_matriz(matriz, objetivo):
+    if not isinstance(matriz, list):
+        print("El argumento 'matriz' debe ser una lista.")
+        return False
+    
     for lista in matriz:
         if busqueda_grupal(lista, objetivo):
             return True
@@ -35,6 +52,9 @@ def busqueda_matriz(matriz, objetivo):
 
 # Función de busqueda creada por el grupo.
 def busqueda_grupal(lista, objetivo):
+    if not isinstance(lista,list):
+        print("El argumento 'lista' debe ser una lista.")
+        return False
     # Valida que la lista no esté vacía.
     if lista == []:
         return False
@@ -54,3 +74,45 @@ def busqueda_grupal(lista, objetivo):
             derecha = derecha[1:]
         
     return False
+
+def crear_matriz(filas,columnas):
+    matriz = []
+    for _ in range(filas):
+        fila = []
+        for _ in range(columnas):
+            fila.append(random.randint(1, 100))
+        matriz.append(fila)
+    return matriz
+
+def prueba_rendimiento(filas,columnas):
+    matriz = crear_matriz(filas,columnas)
+    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
+    matriz2 = quicksort(matriz)
+
+    # Prueba de rendimiento para la función de búsqueda binaria.
+    inicio = time.time()
+    tracemalloc.start()
+
+    BusquedaBinaria_matriz(matriz2, num_busqueda)
+
+    fin = time.time()
+    memoria = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    print(f"\nTiempo de ejecución (Búsqueda Binaria): {fin - inicio} segundos")
+    print(f"Uso de memoria (Búsqueda Binaria): {memoria[1] / 10**6} MB\n")
+
+    # Prueba de rendimiento para la función de búsqueda custom.
+    inicio = time.time()
+    tracemalloc.start()
+
+    busqueda_grupal(matriz, num_busqueda)
+
+    fin = time.time()
+    memoria = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    print(f"Tiempo de ejecución (Búsqueda Grupal): {fin - inicio} segundos")
+    print(f"Uso de memoria (Búsqueda Grupal): {memoria[1] / 10**6} MB")
+
+prueba_rendimiento(500,500)
