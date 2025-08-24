@@ -10,7 +10,7 @@ import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza
 
 # Función que genera números aleatorios para posteriormente agregarlos a las listas de la matriz.
 def Numero_aleatorio():
-    return random.randint(100, 100000)
+    return random.randint(-100000, 100000)
 
 # Función de ordenamiento Quicksort (Función reutilizada para probar función Quicksort vs función generada por el grupo).
 def quicksort(arr):
@@ -53,26 +53,31 @@ def ordenar_listaMatriz(lista):
                 
 # Función para crear una matriz con la cantidad de filas y columnas recibidas y ordenarla para mostrarla.
 def Crear_Matriz(filas, columnas):
-    inicio = time.time() # Se inicia el tiempo de ejecución del programa.
-    tracemalloc.start() # Se inicia el control de memoria durante la ejecución del programa.
-    matriz = []
-    for _ in range(filas):
-        fila = []
-        for _ in range(columnas):
-            fila += [Numero_aleatorio()] # Fila se rellena con números aleatorios.
-        matriz += [fila]
-    
-    matriz = ordenar_MatrizAleatoria(matriz)
-    final = time.time() # Se finaliza el tiempo de ejecución del programa.
-    Duracion = final - inicio # Se resta el tiempo inicial del tiempo final para calcular el tiempo total.
-    Actual, Maximo = tracemalloc.get_traced_memory() # Variables para almacenar la memoria actual y el pico máximo de la memoria utilizada.
-    tracemalloc.stop() # Se frena el control de memoria de la ejecución del programa.
-    # Se muestra el tiempo de la ejecición, la memoria actual, la memoria máxima utilizada y la matriz ordenada.
-    return (
-            f"Duracion: {Duracion}\n"
-            f"Memoria Actual: {Actual}\n"
-            f"Memoria Pico: {Maximo}\n"
-            f"Matriz: {matriz}\n"
-            )
+    if not isinstance(filas,int) or not isinstance(columnas,int):
+        return "Los datos deben de ser enteros"
+    elif filas < 1 or columnas < 1:
+        return "Los datos deben de ser mayor a 0"
+    else:
+        inicio = time.time() # Se inicia el tiempo de ejecución del programa.
+        tracemalloc.start() # Se inicia el control de memoria durante la ejecución del programa.
+        matriz = []
+        for _ in range(filas):
+            fila = []
+            for _ in range(columnas):
+                fila += [Numero_aleatorio()] # Fila se rellena con números aleatorios.
+            matriz += [fila]
+        
+        matriz = ordenar_MatrizAleatoria(matriz)
+        final = time.time() # Se finaliza el tiempo de ejecución del programa.
+        Duracion = final - inicio # Se resta el tiempo inicial del tiempo final para calcular el tiempo total.
+        Actual, Maximo = tracemalloc.get_traced_memory() # Variables para almacenar la memoria actual y el pico máximo de la memoria utilizada.
+        tracemalloc.stop() # Se frena el control de memoria de la ejecución del programa.
+        # Se muestra el tiempo de la ejecición, la memoria actual, la memoria máxima utilizada y la matriz ordenada.
+        return (
+                f"Duracion: {Duracion}\n"
+                f"Memoria Actual: {Actual}\n"
+                f"Memoria Pico: {Maximo}\n"
+                f"Matriz: {matriz}\n"
+                )
 
-# print(Crear_Matriz(100,100))
+print(Crear_Matriz(100,100))
