@@ -1,3 +1,23 @@
+import random
+import time
+import tracemalloc
+"""
+=========================================
+            Funciones de prueba
+=========================================
+"""
+def Numero_aleatorio():
+    return random.randint(100, 100000)
+def Crear_Matriz_2(filas, columnas):
+    matriz = []
+    for _ in range(filas):
+        fila = []
+        for _ in range(columnas):
+            fila += [Numero_aleatorio()]
+        matriz += [fila]
+    
+    return matriz
+
 """
 =========================================
            Funciones de Busqueda
