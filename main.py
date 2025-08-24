@@ -61,6 +61,8 @@ def Crear_Matriz(filas, columnas):
         for _ in range(columnas):
             fila += [Numero_aleatorio()] # Fila se rellena con números aleatorios.
         matriz += [fila]
+    
+    matriz = ordenar_MatrizAleatoria(matriz)
     final = time.time() # Se finaliza el tiempo de ejecución del programa.
     Duracion = final - inicio # Se resta el tiempo inicial del tiempo final para calcular el tiempo total.
     Actual, Maximo = tracemalloc.get_traced_memory() # Variables para almacenar la memoria actual y el pico máximo de la memoria utilizada.
@@ -70,8 +72,10 @@ def Crear_Matriz(filas, columnas):
             f"Duracion: {Duracion}\n"
             f"Memoria Actual: {Actual}\n"
             f"Memoria Pico: {Maximo}\n"
-            f"Matriz: {ordenar_MatrizAleatoria(matriz)}\n"
-             )
+            f"Matriz: {matriz}\n"
+            )
+
+# print(Crear_Matriz(100,100))
 
 """
 ============================================
