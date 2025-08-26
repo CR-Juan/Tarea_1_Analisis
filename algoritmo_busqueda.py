@@ -85,14 +85,14 @@ def crear_matriz(filas,columnas):
     return matriz
 
 def prueba_rendimiento(filas,columnas):
-    matriz = crear_matriz(filas,columnas)
-    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
-    matriz2 = quicksort(matriz)
-
     # Prueba de rendimiento para la función de búsqueda binaria.
     inicio = time.time()
     tracemalloc.start()
 
+    matriz = crear_matriz(filas,columnas)
+    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
+    matriz2 = quicksort(matriz)
+ 
     BusquedaBinaria_matriz(matriz2, num_busqueda)
 
     fin = time.time()
@@ -106,6 +106,10 @@ def prueba_rendimiento(filas,columnas):
     inicio = time.time()
     tracemalloc.start()
 
+    matriz = crear_matriz(filas,columnas)
+    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
+    matriz2 = quicksort(matriz)
+
     busqueda_grupal(matriz, num_busqueda)
 
     fin = time.time()
@@ -115,4 +119,4 @@ def prueba_rendimiento(filas,columnas):
     print(f"Tiempo de ejecución (Búsqueda Grupal): {fin - inicio} segundos")
     print(f"Uso de memoria (Búsqueda Grupal): {memoria[1] / 10**6} MB")
 
-prueba_rendimiento(500,500)
+prueba_rendimiento(100,100)

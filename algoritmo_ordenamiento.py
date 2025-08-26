@@ -77,7 +77,7 @@ def Crear_Matriz(filas, columnas):
                 f"Duracion: {Duracion}\n"
                 f"Memoria Actual: {Actual}\n"
                 f"Memoria Pico: {Maximo}\n"
-                f"Matriz: {matriz}\n"
+                #f"Matriz: {matriz}\n"
                 )
 
-print(Crear_Matriz(100,100))
+# print(Crear_Matriz(32,32))
