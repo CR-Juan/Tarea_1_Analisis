@@ -8,6 +8,25 @@ import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza
 =========================================
 """
 
+##########################################################################
+#Ejercicios nuevos
+
+def suma_Lista(Lista):
+    suma = 0
+    New_Lista = []
+    for x in Lista:
+        suma += x
+    New_Lista += [suma]
+    return New_Lista
+
+def ordenar_Listas_enMatriz(Matriz):
+    for _ in range(len(Matriz)):
+        for x in range(len(Matriz)-1):
+            if Matriz[x][0] > Matriz[x + 1][0]:
+                Matriz[x], Matriz[x + 1] = Matriz[x + 1], Matriz[x]
+    return Matriz
+##############################################################################3 
+
 # Función que genera números aleatorios para posteriormente agregarlos a las listas de la matriz.
 def Numero_aleatorio():
     return random.randint(-100000, 100000)
@@ -27,29 +46,10 @@ def quicksort(arr):
 # Función para ordenar cada una de las listas que están dentro de la matriz.
 def ordenar_MatrizAleatoria(Matriz):
     for x in range(len(Matriz)):
-        Matriz[x] = ordenar_listaMatriz(Matriz[x])
+        Matriz[x] = suma_Lista(Matriz[x])
+    Matriz = ordenar_Listas_enMatriz(Matriz)
     return Matriz
 
-# Función que se encarga de ordenar cada uno de los elementos que están dentro de una lista.
-def ordenar_listaMatriz(lista):
-    NewLista = [] # Variable donde se almacenará la lista ya ordenada para retornarla al final.
-    while lista != []:
-        x = lista[0] # Variable que almacenará el primer elemento de la lista.
-        lista = lista[1:] # Se recorta la lista sin el primer elemento.
-        y = 0 
-        while y < len(lista):
-            if x > lista[0]:
-                lista += [x] 
-                x = lista[0]
-                lista = lista[1:]
-                y += 1
-            else:
-                lista += [lista[0]]
-                lista = lista[1:]
-                y += 1
-                
-        NewLista += [x]
-    return NewLista
                 
 # Función para crear una matriz con la cantidad de filas y columnas recibidas y ordenarla para mostrarla.
 def Crear_Matriz(filas, columnas):
@@ -66,7 +66,6 @@ def Crear_Matriz(filas, columnas):
             for _ in range(columnas):
                 fila += [Numero_aleatorio()] # Fila se rellena con números aleatorios.
             matriz += [fila]
-        
         matriz = ordenar_MatrizAleatoria(matriz)
         final = time.time() # Se finaliza el tiempo de ejecución del programa.
         Duracion = final - inicio # Se resta el tiempo inicial del tiempo final para calcular el tiempo total.
@@ -77,7 +76,7 @@ def Crear_Matriz(filas, columnas):
                 f"Duracion: {Duracion}\n"
                 f"Memoria Actual: {Actual}\n"
                 f"Memoria Pico: {Maximo}\n"
-                #f"Matriz: {matriz}\n"
+                f"Matriz: {matriz}\n"
                 )
 
-# print(Crear_Matriz(32,32))
+#print(Crear_Matriz(3,3))
