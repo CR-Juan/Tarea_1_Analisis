@@ -8,9 +8,7 @@ import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza
 =========================================
 """
 
-##########################################################################
-#Ejercicios nuevos
-
+# Función para sumar listas (opcional).
 def suma_Lista(Lista):
     suma = 0
     New_Lista = []
@@ -19,13 +17,13 @@ def suma_Lista(Lista):
     New_Lista += [suma]
     return New_Lista
 
+# Función para ordenar las listas de la matriz.
 def ordenar_Listas_enMatriz(Matriz):
     for _ in range(len(Matriz)):
         for x in range(len(Matriz)-1):
             if Matriz[x][0] > Matriz[x + 1][0]:
                 Matriz[x], Matriz[x + 1] = Matriz[x + 1], Matriz[x]
-    return Matriz
-##############################################################################3 
+    return Matriz 
 
 # Función que genera números aleatorios para posteriormente agregarlos a las listas de la matriz.
 def Numero_aleatorio():
@@ -46,7 +44,7 @@ def quicksort(arr):
 # Función para ordenar cada una de las listas que están dentro de la matriz.
 def ordenar_MatrizAleatoria(Matriz):
     for x in range(len(Matriz)):
-        Matriz[x] = suma_Lista(Matriz[x])
+        Matriz[x] = suma_Lista(Matriz[x]) # En caso de comprobar la funcionalidad del programa con "Quicksort" cambiar esta linea por lo siguiente: Matriz[x] = quicksort(Matriz[x])
     Matriz = ordenar_Listas_enMatriz(Matriz)
     return Matriz
 

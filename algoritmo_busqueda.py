@@ -3,7 +3,6 @@ import time # Libreria para visaulizar el tiempo de ejecución del programa.
 import tracemalloc # Libreria para visualizar la cantidad de memoria que utiliza la ejecucion del programa.
 from algoritmo_ordenamiento import quicksort # Importa la función de ordenamiento creada por el grupo.
 
-
 """
 ============================================
            Funciones de Busqueda
@@ -75,6 +74,7 @@ def busqueda_grupal(lista, objetivo):
         
     return False
 
+# Función para crear matriz con elementos aleatorios según las filas y columnas dadas.
 def crear_matriz(filas,columnas):
     matriz = []
     for _ in range(filas):
@@ -84,37 +84,38 @@ def crear_matriz(filas,columnas):
         matriz.append(fila)
     return matriz
 
+# Función principal para probar el rendimiento de ambos algoritmos, el de la Búsqueda Binaria y la Búsqueda Grupal.
 def prueba_rendimiento(filas,columnas):
     # Prueba de rendimiento para la función de búsqueda binaria.
-    inicio = time.time()
-    tracemalloc.start()
+    inicio = time.time() # Variable para almacenar el tiempo de ejecución del algoritmo
+    tracemalloc.start() # Se inicia el recorrido de espacio en la memoria.
 
-    matriz = crear_matriz(filas,columnas)
-    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
-    matriz2 = quicksort(matriz)
+    matriz = crear_matriz(filas,columnas) 
+    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)] # Se selecciona un elemento random dentro de la matriz para luego buscarlo
+    matriz2 = quicksort(matriz) # Se ordena la matriz para realizar la búsqueda con la función de Búsqueda Binaria.
  
     BusquedaBinaria_matriz(matriz2, num_busqueda)
 
-    fin = time.time()
-    memoria = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    fin = time.time() # Variable donde se guarda el tiempo final de la ejecución del algoritmo.
+    memoria = tracemalloc.get_traced_memory() # Varibale donde se almacena toda la memoria utilizada.
+    tracemalloc.stop() # Se frena el control del uso de la memoria.
 
     print(f"\nTiempo de ejecución (Búsqueda Binaria): {fin - inicio} segundos")
     print(f"Uso de memoria (Búsqueda Binaria): {memoria[1] / 10**6} MB\n")
 
     # Prueba de rendimiento para la función de búsqueda custom.
-    inicio = time.time()
-    tracemalloc.start()
+    inicio = time.time() # Variable para almacenar el tiempo de ejecución del algoritmo
+    tracemalloc.start() # Se inicia el recorrido de espacio en la memoria.
 
     matriz = crear_matriz(filas,columnas)
-    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)]
-    matriz2 = quicksort(matriz)
+    num_busqueda = matriz[random.randint(0, filas-1)][random.randint(0, columnas-1)] # Se selecciona un elemento random dentro de la matriz para luego buscarlo
+    matriz2 = quicksort(matriz) # Se ordena la matriz para realizar la búsqueda con la función de Búsqueda Grupal.
 
     busqueda_grupal(matriz, num_busqueda)
 
-    fin = time.time()
-    memoria = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    fin = time.time() # Variable donde se guarda el tiempo final de la ejecución del algoritmo.
+    memoria = tracemalloc.get_traced_memory() # Varibale donde se almacena toda la memoria utilizada.
+    tracemalloc.stop() # Se frena el control del uso de la memoria.
 
     print(f"Tiempo de ejecución (Búsqueda Grupal): {fin - inicio} segundos")
     print(f"Uso de memoria (Búsqueda Grupal): {memoria[1] / 10**6} MB")
