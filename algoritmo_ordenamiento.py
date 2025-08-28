@@ -74,7 +74,7 @@ def Crear_Matriz(filas, columnas):
                 f"Duracion: {Duracion}\n"
                 f"Memoria Actual: {Actual}\n"
                 f"Memoria Pico: {Maximo}\n"
-                f"Matriz: {matriz}\n"
-                )
+                # f"Matriz: {matriz}\n" En caso de desear ver la matriz ordenada impresa, quitar este comentario.
+                ) 
 
 #print(Crear_Matriz(3,3))
